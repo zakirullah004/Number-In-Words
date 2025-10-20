@@ -56,27 +56,28 @@ function convertNumbertoWord(num){
 
     //thousand
     if(num >= 1000){
-        word += convertNumbertoWord(Math.floor(num/1000)) + " Thousand "
+        word += convertNumbertoWord(Math.floor(num/1000)) + " thousand "
         num %= 1000
     }
 
     // hundred
     if(num >= 100){
-            word += convertNumbertoWord(Math.floor(num / 100)) + " Hundred ";
+            word += convertNumbertoWord(Math.floor(num / 100)) + " hundred ";
             num %= 100;
     }
 
     if(num > 20){
         if(word != "") word += 'and ';
-
+        
         word += convertNumbertoWord(Math.floor(num / 10)*10);
         num %= 10;
-
+        
         if(num % 10 > 0){
             word += " " +allNumbers[num%10]
         }
-
+        
     }else if(num % 100 > 0){
+        if(word != "") word += 'and ';
        word += allNumbers[num]
     }
 
@@ -95,7 +96,7 @@ convertBtn.addEventListener('click',function(e){
 
     let toNum = +input.value.trim()
 
-    if(isNaN(toNum)){
+    if(isNaN(toNum) || toNum < 0){
         alert("please write positive number")
     }else{
 
