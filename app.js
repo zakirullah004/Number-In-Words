@@ -29,19 +29,38 @@ let allNumbers = {
     90: "ninety"
 };
 
+
 function convertNumbertoWord(num){
     if(allNumbers[num]) return allNumbers[num]
 
     let word = "";
 
+    // out of range 
+
+    if(num > 100000000){
+        word = "Out of range"
+        num = 0;
+    }
+
+    // million 
+    if(num >= 1000000){
+        word += convertNumbertoWord(Math.floor(num/1000000)) + " Million"
+        num %= 1000000;
+    }
+
+    //lac
     if(num >= 100000){
-        word += convertNumbertoWord(Math.floor(num/10000)) + " Lack "
+        word += convertNumbertoWord(Math.floor(num/100000)) + " Lack "
         num %= 100000
     }
+
+    //thousand
     if(num >= 1000){
         word += convertNumbertoWord(Math.floor(num/1000)) + " Thousand "
         num %= 1000
     }
+
+    // hundred
     if(num >= 100){
             word += convertNumbertoWord(Math.floor(num / 100)) + " Hundred ";
             num %= 100;
@@ -65,4 +84,28 @@ function convertNumbertoWord(num){
     return word
 
 }
-console.log(convertNumbertoWord(190340));
+
+
+let convertBtn = document.getElementById("convertBtn")
+let input = document.querySelector("#input")
+let resultText =  document.querySelector("#result")
+
+convertBtn.addEventListener('click',function(e){
+    e.preventDefault()
+
+    let toNum = +input.value.trim()
+
+    if(isNaN(toNum)){
+        alert("please write positive number")
+    }else{
+
+        let result = convertNumbertoWord(toNum)
+        resultText.innerHTML = `${toNum} : ${result}`
+        
+    }
+    input.focus()
+    input.value = "";
+
+
+})
+// let result = convertNumbertoWord(120);
