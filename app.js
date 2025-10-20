@@ -34,9 +34,17 @@ function convertNumbertoWord(num){
 
     let word = "";
 
+    if(num >= 100000){
+        word += convertNumbertoWord(Math.floor(num/10000)) + " Lack "
+        num %= 100000
+    }
+    if(num >= 1000){
+        word += convertNumbertoWord(Math.floor(num/1000)) + " Thousand "
+        num %= 1000
+    }
     if(num >= 100){
-        word += convertNumbertoWord(Math.floor(num / 100)) + " Hundred ";
-        num %= 100;
+            word += convertNumbertoWord(Math.floor(num / 100)) + " Hundred ";
+            num %= 100;
     }
 
     if(num > 20){
@@ -49,11 +57,12 @@ function convertNumbertoWord(num){
             word += " " +allNumbers[num%10]
         }
 
-    }else if(num%100 < 20){
+    }else if(num % 100 > 0){
        word += allNumbers[num]
     }
+
 
     return word
 
 }
-console.log(convertNumbertoWord(398));
+console.log(convertNumbertoWord(190340));
