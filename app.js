@@ -96,7 +96,7 @@ convertBtn.addEventListener('click',function(e){
 
     let toNum = +input.value.trim()
 
-    if(isNaN(toNum) || toNum < 0){
+    if(isNaN(toNum) || toNum < 0 || toNum == -0){
         alert("please write positive number")
     }else{
 
